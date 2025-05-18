@@ -50,8 +50,7 @@ function openModal(task) {
     </div>
   `;
   modalContainer.classList.remove("hidden");
-}
-
+} 
 // Close modal
 function closeModal() {
   document.getElementById("modal-container").classList.add("hidden");

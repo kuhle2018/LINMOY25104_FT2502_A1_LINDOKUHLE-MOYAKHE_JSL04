@@ -325,6 +325,20 @@ h2 {
   background-color: #e63946; /* Delete button - Red */
   color: white;
 }
+.save-btn {
+  background-color: #1da851; /* Green */
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #ffcc00; /* Yellow */
+  color: black;
+}
+
+.delete-btn {
+  background-color: #e63946; /* Red */
+  color: white;
+}
 }
 
 /******** Mobile ********/
