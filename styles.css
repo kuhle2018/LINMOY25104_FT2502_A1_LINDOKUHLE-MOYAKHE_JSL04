@@ -1,356 +1,260 @@
 /* ========================
    Global & Root Variables
 ======================== */
-* {
-  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+.tasks {
+  border: 1px solid #ffff;
+  width: 90%;
+  height: 30px;
+  margin-top: 10px;
+  background-color: #ffff;
+  border-radius: 8px;
+  display: inline-block;
+  padding-left: 10px;
+  padding-top: 15px;
+  font-size: 14px;
+  font-weight: 700;
+  padding-bottom: 3px;
+  box-shadow: 0 5px 6px #364e7e1a;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-:root {
-  --primary-color: #ffffff;
-  --secondary-color: #f4f7fd;
-  --primary-font-color: #000000;
-  --secondary-font-color: #828fa3;
-  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
-  --sidebar-width: 300px; /* Sidebar fixed width */
+.tasks:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-/* ================
-   Base Elements
-================ */
 body {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  display: flex; /* Allow layout to span horizontally */
-  flex-direction: row;
-  width: 100%;
-  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr 3fr;
+  grid-template-areas:
+    "Sidebar heading"
+    "Sidebar main-body"
+    "Sidebar main-body";
+  column-gap: 2px;
+  background-color: #e4ebfa;
   margin: 0;
-  background-color: var(--secondary-color);
-  font-size: 1rem; /* Base font size for rem scaling */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
-
-/* ================
-   Sidebar Layout
-================ */
-.side-bar {
+.desktop-only {
+  margin-left: 30px;
+  margin-top: 20px;
+  width: 150px;
+}
+.btn{
   display: flex;
-  flex-direction: column;
-  background-color: var(--primary-color);
-  border-right: 1px solid #e4ebfa; /* Light divider */
-  width: var(--sidebar-width);
-  height: 100vh;
+  justify-content: space-between;
 }
-
-#side-logo-div {
-  margin: 33px 113px 54px 34px; /* Spacing around logo */
-  display: flex;
-  justify-content: flex-start;
+.add-task-btn{
+  background-color: #635fc7;
+   color: #ffff;
+   height: 20%;
+   margin-top: 15px;
+   border-radius: 20px;
+   font-size: 14px;
+   padding: 10px 20px;
+   margin-right: 20px;
+   border: none;
+   cursor: pointer;
 }
-
-#logo {
-  width: 100%; /* Make logo responsive within container */
-}
-
-.boards-nav-links-div {
-  display: flex;
-  flex-direction: column;
-  color: var(--primary-font-color);
-}
-
-#headline-sidepanel {
-  padding: 0 12px 0 50px; /* Aligns section content from left and right */
-}
-
-h4 {
-  color: var(--secondary-font-color);
-  font-size: 0.75rem;
-  letter-spacing: 0.125rem; /* Makes heading more spaced */
-}
-
-.board-btn {
-  font-family: inherit;
+/* modal backdrop */
+.modal{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between icon and text */
-  background-color: #635fc7;
-  color: #fff;
+  justify-content: center;
+  z-index: 999;
+}
+
+.hidden{
+  display: none;
+}
+/*modal content box*/
+.modal-content{
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width:90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* close btn */
+.close-modal{
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
   border: none;
-  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
-  height: 48px;
-  width: 276px;
-  padding: 28px 12px 28px 50px;
-  font-size: 0.9375rem;
+  font-size: 20px;
+  cursor: pointer;
+}
+/* Textarea and inputs */
+.modal-content input,
+.modal-content textarea,
+.modal-content select{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  resize: none;
+}
+/* Save Button */
+#saveTask {
+  background-color: #635fc7;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  transition: background 0.3s ease;
 }
 
-/* ===============
-   Main Layout
-================ */
-#layout {
-  flex: 1; /* Fills remaining space beside sidebar */
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  width: 100%;
+#saveTask:hover {
+  background-color: #524bc5;
 }
 
-/* ===============
-   Header Section
-================ */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--primary-color);
-  color: var(--primary-font-color);
-  height: 96px;
-  padding: 0 35px 0 30px;
-  border-bottom: 1px solid #e4ebfa;
-  width: 100%;
-  font-size: 1.875rem;
-  font-weight: 600;
-}
-
-.header-name-div {
-  display: flex;
-  align-items: center;
-}
-
-.logo-mobile {
-  display: none; /* Hidden on desktop; shown on smaller screens */
-}
-
-/* ===============
-   Board Columns
-================ */
-.container {
-  display: flex;
-  flex-direction: column;
-  padding-left: 35px;
-  box-sizing: border-box;
-}
-
-.card-column-main {
-  display: grid;
-  grid-template-columns: repeat(
-    3,
-    minmax(0, 304px)
-  ); /* 3 columns with min size */
-  gap: 8px; /* Space between columns */
-}
-
-.column-div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 12px;
-}
-
-.column-head-div {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Space between dot and column title */
-}
-
-.columnHeader {
-  font-size: 0.75rem;
-  letter-spacing: 0.125rem;
-  color: var(--secondary-font-color);
-  margin: 0;
-}
-
-/* Status Dots */
-.dot {
-  height: 15px;
-  width: 15px;
-  border-radius: 50%; /* Make it circular */
-  display: inline-block;
-}
-
-#todo-dot {
-  background-color: #49c4e5;
-}
-
-#doing-dot {
-  background-color: #8471f2;
-}
-
-#done-dot {
-  background-color: #219c90;
-}
-
-/* ===============
-   Task Cards
-================ */
-.tasks-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.task-div {
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
-  width: 100%;
-  height: 60px;
-  background-color: var(--primary-color);
-  color: var(--primary-font-color);
-  border-radius: 12px;
-  box-shadow: var(--primary-box-shadow);
-  cursor: pointer; /* Indicate it's clickable */
+#side-heading {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgb(130, 143, 163);
+  margin-left: 45px;
+  margin-top: 20px;
   margin-bottom: 20px;
-  font-size: 0.9375rem;
-  font-weight: bold;
+}
+.header-heading {
+  margin-left: 20px;
+}
+.mobile-btn {
+  display: none;
+}
+.desktop-btn {
+  background-color: #635fc7;
+  color: #ffff;
+  border: none;
+  width: 95%;
+  height: 40px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  cursor: pointer;
+  padding-right: 90px;
+}
+.mobile-only {
+  display: none;
 }
 
-/* ===============
-   Headings
-================ */
-h2 {
-  font-size: 1.5rem;
+.heading {
+  grid-area: heading;
+  border: 1px solid #ffff;
+  background-color: #ffff;
+}
+.main-body {
+  grid-area: main-body;
+  background-color: #e4ebfa;
+}
+
+.Sidebar {
+  grid-area: Sidebar;
+  border: 1px solid #ffff;
+  background-color: #ffff;
+}
+.ball-container {
+  font-weight: normal;
+  color: rgb(130, 143, 163);
+  font-size: 11px;
   margin: 0;
 }
-
-/* ========================
-   Responsive Styles
-======================== */
-
-/******** Tablets ********/
-@media screen and (max-width: 1023px) {
-  .side-bar {
-    display: none; /* Hide sidebar on tablets and smaller */
-  }
-
-  .side-bar.show-sidebar {
-    display: flex !important;
-    position: fixed; /* Overlay on top of page */
-    height: auto;
-  }
-
-  #side-logo-div {
+.list-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 20px;
+  grid-template-rows: 3;
+  margin-top: 20px;
+}
+#ball-1 {
+  background-color: #49c4e5;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+}
+#ball-2 {
+  background-color: #8471f2;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+}
+#ball-3 {
+  background-color: #67e2ae;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+}
+.balls {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media (max-width: 480px) {
+  .Sidebar {
     display: none;
   }
-
-  .logo-mobile {
+  .heading {
+    display: flex;
+    flex-direction: row;
+  }
+  .mobile-only {
     display: block;
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+    width: 40px;
+    margin-left: 20px;
   }
-
   body {
-    font-size: 0.8rem;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-areas:
+      "heading"
+      "main-body";
+  }
+  .list-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 10px;
+  }
+  .balls {
+    margin-top: 20px;
+  }
+  .tasks {
+    font-size: 16px;
+    white-space: nowrap;
   }
 
-  .board-btn {
-    font-size: 0.8rem;
-    padding-left: 15px;
-    margin-right: 15px;
-    font-weight: 700;
+  .tasks:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
   }
-
-  .container {
-    padding: 0;
-    width: 100%;
-    align-items: center; /* Center columns on smaller screens */
+  .ball-container {
+    font-size: 16px;
   }
-
-  .card-column-main {
-    grid-template-columns: repeat(2, minmax(0, 360px));
-    gap: 8px;
-  }
-
-  header {
-    height: 64px;
-    padding: 0 10px 0 18px;
-    border: none;
-  }
-
-  #header-board-name {
-    font-size: 1rem;
-  }
-
-  .task-div {
-    width: 100%;
-  }
-
-  .columnHeader {
-    font-size: 0.75rem;
-  }
-
-  .dot {
-    height: 8px;
-    width: 8px;
-  }
-
-  .column-head-div {
-    gap: 8px;
-  }
-
-  .column-div {
-    width: 100%;
-  }
-  /* ========================
-   Task Click Interaction
-======================== */
-.task-div:active,
-.task-div.selected {
-  background-color: #635fc7; /* Matches primary button color */
-  color: #ffffff; /* Ensures contrast with text */
-  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.3); /* Slight emphasis */
-  transition: background-color 0.3s ease-in-out;
-}
-
-.modal-content button {
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-/* Button colors matching expected UI */
-.modal-content button:nth-child(1) {
-  background-color: #1da851; /* Save button - Green */
-  color: white;
-}
-
-.modal-content button:nth-child(2) {
-  background-color: #ffcc00; /* Cancel button - Yellow */
-  color: black;
-}
-
-.modal-content button:nth-child(3) {
-  background-color: #e63946; /* Delete button - Red */
-  color: white;
-}
-.save-btn {
-  background-color: #1da851; /* Green */
-  color: white;
-}
-
-.cancel-btn {
-  background-color: #ffcc00; /* Yellow */
-  color: black;
-}
-
-.delete-btn {
-  background-color: #e63946; /* Red */
-  color: white;
-}
-}
-
-/******** Mobile ********/
-@media screen and (max-width: 576px) {
-  .card-column-main {
-    grid-template-columns: minmax(
-      0,
-      380px
-    ); /* Stack columns in single column */
-  }
-
-  .column-div {
-    padding: 24px;
+    .modal-content {
+    width: 90%;
+    padding: 20px;
   }
 }
