@@ -2,7 +2,7 @@ const initialTasks = [
   {
     id: 1,
     title: "Launch Epic Career 🚀",
-    description: "Create a killer Resume",
+    description: "Create a killer resume",
     status: "todo",
   },
   {
