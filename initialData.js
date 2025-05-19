@@ -18,24 +18,21 @@ const initialTasks = [
     status: "doing",
   },
   {
-    id: 4,
+    id: 11,
     title: "Learn Data Structures and Algorithms 📚",
-    description:
-      "Study fundamental data structures and algorithms to solve coding problems efficiently",
+    description: "Study fundamental data structures and algorithms to solve coding problems efficiently",
     status: "todo",
   },
   {
-    id: 5,
+    id: 12,
     title: "Contribute to Open Source Projects 🌐",
-    description:
-      "Gain practical experience and collaborate with others in the software development community",
+    description: "Gain practical experience and collaborate with others in the software development community",
     status: "done",
   },
   {
-    id: 6,
+    id: 13,
     title: "Build Portfolio Projects 🛠️",
-    description:
-      "Create a portfolio showcasing your skills and projects to potential employers",
+    description: "Create a portfolio showcasing your skills and projects to potential employers",
     status: "done",
   },
 ];
